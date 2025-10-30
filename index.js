@@ -1,17 +1,34 @@
-export const getYamsScore = (dice) => {
-    // Number of points for a Yams
-    let yamsScore = 0;
+// enum for score categories
+const ScoreCategory = {
+    YAMS: 50,
+    SQUARE: 35,
+    DEFAULT: 0
+};
 
-    // if all dice have the same value, return 50 points
+export const getYamsScore = (dice) => {
+    let yamsScore = 0;
     const firstDieValue = dice[0];
+    const diceCount = {};
+    
+    // YAMS check
     const allDiceSame = dice.every(die => die === firstDieValue);
     if (allDiceSame) {
-        return 50;
+        return ScoreCategory.YAMS;
+    }
+
+    // Square check
+    for (const die of dice) {
+        diceCount[die] = (diceCount[die] || 0) + 1;
+    }
+    const hasSquare = Object.values(diceCount).some(count => count === 4);
+    if (hasSquare) {
+        return ScoreCategory.SQUARE;
     }
 
     // Sum all dice values
     for (const die of dice) {
         yamsScore += die;
     }
+    
     return yamsScore;
 }
