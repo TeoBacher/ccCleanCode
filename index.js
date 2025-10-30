@@ -1,5 +1,5 @@
 // enum for score categories
-const ScoreCategory = {
+export const ScoreCategory = {
     YAMS: 50,
     SQUARE: 35,
     DEFAULT: 0
