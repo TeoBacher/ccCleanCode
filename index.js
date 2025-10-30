@@ -1,8 +1,10 @@
 // enum for score categories
 export const ScoreCategory = {
-    YAMS: 50,
-    SQUARE: 35,
     BRELAN: 25,
+    FULL: 30,
+    SQUARE: 35,
+    SUITE: 40,
+    YAMS: 50,
     DEFAULT: 0
 };
 
@@ -17,6 +19,13 @@ export const getYamsScore = (dice) => {
         return ScoreCategory.YAMS;
     }
 
+    // Suite check
+    const sortedDice = [...new Set(dice)].sort((a, b) => a - b);
+    const isSuite = sortedDice.length === 5 && sortedDice[4] - sortedDice[0] === 4;
+    if (isSuite) {
+        return ScoreCategory.SUITE;
+    }
+
     // Square check
     for (const die of dice) {
         diceCount[die] = (diceCount[die] || 0) + 1;
@@ -24,6 +33,12 @@ export const getYamsScore = (dice) => {
     const hasSquare = Object.values(diceCount).some(count => count === 4);
     if (hasSquare) {
         return ScoreCategory.SQUARE;
+    }
+
+    // Full check
+    const hasFull = Object.values(diceCount).includes(3) && Object.values(diceCount).includes(2);
+    if (hasFull) {
+        return ScoreCategory.FULL;
     }
 
     // Brelan check
@@ -40,3 +55,7 @@ export const getYamsScore = (dice) => {
     return yamsScore;
 }
 
+// Function to sum scores in an array
+export const sumScores = (scores) => {
+    return scores.reduce((total, score) => total + score, 0);
+};
