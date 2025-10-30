@@ -1,5 +1,5 @@
 import { describe, expect, it } from "vitest";
-import { getYamsScore, ScoreCategory, sumScores } from "./index.js";
+import { figureOutScore, ScoreCategory, sumScores } from "./index.js";
 
 describe("yams rules", () => {
     it.each([
@@ -10,7 +10,7 @@ describe("yams rules", () => {
         [[4, 4, 4, 6, 5], ScoreCategory.BRELAN],
         [[1, 2, 3, 4, 6], 16]
     ])("should return %s for dice %s", (dice, expectedScore) => {
-        expect(getYamsScore(dice)).toBe(expectedScore);
+        expect(figureOutScore(dice)).toBe(expectedScore);
     });
 });
 

@@ -8,7 +8,7 @@ export const ScoreCategory = {
     DEFAULT: 0
 };
 
-export const getYamsScore = (dice) => {
+export const figureOutScore = (dice) => {
     let yamsScore = 0;
     const firstDieValue = dice[0];
     const diceCount = {};
@@ -57,6 +57,6 @@ export const getYamsScore = (dice) => {
 
 // Function to sum scores in an array
 export const sumScores = (scores) => {
-    const actualScores = scores.map(dice => getYamsScore(dice));
+    const actualScores = scores.map(dice => figureOutScore(dice));
     return actualScores.reduce((total, score) => total + score, 0);
 };
