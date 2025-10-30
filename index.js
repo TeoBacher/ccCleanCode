@@ -1,5 +1,5 @@
 // enum for score categories
-export const ScoreCategory = {
+export const SCORE_CATEGORY = {
     BRELAN: 25,
     FULL: 30,
     SQUARE: 35,
@@ -7,6 +7,8 @@ export const ScoreCategory = {
     YAMS: 50,
     DEFAULT: 0
 };
+
+export const PLAYED_FIGURES = new Set();
 
 export const figureOutScore = (dice) => {
     let score = 0;
@@ -16,14 +18,16 @@ export const figureOutScore = (dice) => {
     // YAMS check
     const allDiceSame = dice.every(die => die === firstDieValue);
     if (allDiceSame) {
-        return ScoreCategory.YAMS;
+        PLAYED_FIGURES.add(SCORE_CATEGORY.YAMS);
+        return SCORE_CATEGORY.YAMS;
     }
 
     // Suite check
     const sortedDice = [...new Set(dice)].sort((a, b) => a - b);
     const isSuite = sortedDice.length === 5 && sortedDice[4] - sortedDice[0] === 4;
     if (isSuite) {
-        return ScoreCategory.SUITE;
+        PLAYED_FIGURES.add(SCORE_CATEGORY.SUITE);
+        return SCORE_CATEGORY.SUITE;
     }
 
     // Square check
@@ -32,23 +36,27 @@ export const figureOutScore = (dice) => {
     }
     const hasSquare = Object.values(diceCount).some(count => count === 4);
     if (hasSquare) {
-        return ScoreCategory.SQUARE;
+        PLAYED_FIGURES.add(SCORE_CATEGORY.SQUARE);
+        return SCORE_CATEGORY.SQUARE;
     }
 
     // Full check
     const hasFull = Object.values(diceCount).includes(3) && Object.values(diceCount).includes(2);
     if (hasFull) {
-        return ScoreCategory.FULL;
+        PLAYED_FIGURES.add(SCORE_CATEGORY.FULL);
+        return SCORE_CATEGORY.FULL;
     }
 
     // Brelan check
     const hasBrelan = Object.values(diceCount).some(count => count === 3);
     if (hasBrelan) {
-        return ScoreCategory.BRELAN;
+        PLAYED_FIGURES.add(SCORE_CATEGORY.BRELAN);
+        return SCORE_CATEGORY.BRELAN;
     }
 
     // Sum of all dice values
     for (const die of dice) {
+        PLAYED_FIGURES.add(SCORE_CATEGORY.DEFAULT);
         score += die;
     }
     
@@ -60,3 +68,5 @@ export const sumScores = (scores) => {
     const actualScores = scores.map(dice => figureOutScore(dice));
     return actualScores.reduce((total, score) => total + score, 0);
 };
+
+
