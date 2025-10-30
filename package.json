@@ -1,0 +1,22 @@
+{
+  "name": "cccleancode",
+  "version": "1.0.0",
+  "main": "index.js",
+  "scripts": {
+    "test": "vitest"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/TeoBacher/ccCleanCode.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/TeoBacher/ccCleanCode/issues"
+  },
+  "homepage": "https://github.com/TeoBacher/ccCleanCode#readme",
+  "description": "",
+  "dependencies": {
+    "vitest": "^3.2.4"
+  }
+}
