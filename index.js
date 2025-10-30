@@ -9,7 +9,7 @@ export const ScoreCategory = {
 };
 
 export const figureOutScore = (dice) => {
-    let yamsScore = 0;
+    let score = 0;
     const firstDieValue = dice[0];
     const diceCount = {};
     
@@ -49,10 +49,10 @@ export const figureOutScore = (dice) => {
 
     // Sum of all dice values
     for (const die of dice) {
-        yamsScore += die;
+        score += die;
     }
     
-    return yamsScore;
+    return score;
 }
 
 // Function to sum scores in an array
