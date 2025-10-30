@@ -2,6 +2,7 @@
 export const ScoreCategory = {
     YAMS: 50,
     SQUARE: 35,
+    BRELAN: 25,
     DEFAULT: 0
 };
 
@@ -25,6 +26,12 @@ export const getYamsScore = (dice) => {
         return ScoreCategory.SQUARE;
     }
 
+    // Brelan check
+    const hasBrelan = Object.values(diceCount).some(count => count === 3);
+    if (hasBrelan) {
+        return ScoreCategory.BRELAN;
+    }
+
     // Sum all dice values
     for (const die of dice) {
         yamsScore += die;
@@ -32,3 +39,4 @@ export const getYamsScore = (dice) => {
     
     return yamsScore;
 }
+

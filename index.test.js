@@ -2,17 +2,12 @@ import { describe, expect, it } from "vitest";
 import { getYamsScore, ScoreCategory } from "./index.js";
 // TODO: yams first tests
 describe("yams rules", () => {
-    it("should return the correct score", () => {
-        expect(getYamsScore([1, 2, 3, 4, 5])).toBe(15);
+    it.each([
+        [[2, 2, 2, 2, 2], ScoreCategory.YAMS],
+        [[3, 3, 3, 3, 1], ScoreCategory.SQUARE],
+        [[4, 4, 4, 6, 5], ScoreCategory.BRELAN],
+        [[1, 2, 3, 4, 6], 16]
+    ])("should return %s for dice %s", (dice, expectedScore) => {
+        expect(getYamsScore(dice)).toBe(expectedScore);
     });
-
-    it("should return 50 for a Yams", () => {
-        expect(getYamsScore([6, 6, 6, 6, 6])).toBe(ScoreCategory.YAMS);
-    });
-
-    it("should return 35 for a square", () => {
-        expect(getYamsScore([5, 5, 5, 5, 3])).toBe(ScoreCategory.SQUARE);
-    });
-
-    it()
 });
