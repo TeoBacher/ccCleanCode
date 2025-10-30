@@ -47,7 +47,7 @@ export const getYamsScore = (dice) => {
         return ScoreCategory.BRELAN;
     }
 
-    // Sum all dice values
+    // Sum of all dice values
     for (const die of dice) {
         yamsScore += die;
     }
@@ -57,5 +57,6 @@ export const getYamsScore = (dice) => {
 
 // Function to sum scores in an array
 export const sumScores = (scores) => {
-    return scores.reduce((total, score) => total + score, 0);
+    const actualScores = scores.map(dice => getYamsScore(dice));
+    return actualScores.reduce((total, score) => total + score, 0);
 };
